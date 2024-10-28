@@ -15,7 +15,8 @@
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix",
     "format": "prettier --write \"src/**/*.ts\"",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "pnpm build",
+    "release": "release-it"
   },
   "devDependencies": {
     "@types/node": "^20.8.0",
@@ -25,6 +26,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "prettier": "^3.3.3",
+    "release-it": "^17.10.0",
     "tsup": "^8.3.5",
     "typescript": "^5.2.2"
   },
