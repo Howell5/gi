@@ -27,46 +27,56 @@ bash
 
 复制
 
-# Create a patch release (0.0.x)
+## Create a patch release (0.0.x)
 
-version-manager patch
+```bash
+gi patch
+```
 
-# Create a minor release (0.x.0)
+## Create a minor release (0.x.0)
 
-version-manager minor
+```bash
+gi minor
+```
 
-# Create a major release (x.0.0)
+## Create a major release (x.0.0)
 
-version-manager major
-Development
-bash
+```bash
+gi major
+```
 
-复制
+## Development
 
-# Install dependencies
+### Install dependencies
 
+```bash
 pnpm install
+```
 
-# Development with hot reload
+### Development with hot reload
 
+```bash
 pnpm dev
+```
 
-# Build for production
+### Build for production
 
+```bash
 pnpm build
+```
 
-# Run tests
+### Run tests
 
+```bash
 pnpm test
+```
 
-# Lint files
+### Lint files
 
+```bash
 pnpm lint
-License
+```
+
+## License
+
 MIT
-
-json
-
-复制
-
-5. 更新 `package.json` 添加脚本和依赖：
