@@ -1,14 +1,21 @@
 # gi-version-manager
 
-## 安装
+A CLI tool for managing GitLab project versions and releases.
+
+## Prerequisites
+
+This tool requires the following dependencies:
+
+- Node.js >= 18
+- [glab](https://gitlab.com/gitlab-org/cli) - GitLab CLI tool
 
 ```bash
-npm install -g gi-version-manager
-# or
-pnpm add -g gi-version-manager
-```
+# Install on macOS
+brew install glab
 
-A CLI tool for managing GitLab project versions and releases.
+# Install on Linux
+# (Add appropriate installation instructions for other platforms)
+```
 
 ## Installation
 
@@ -24,8 +31,6 @@ Node.js >= 18
 GitLab CLI (glab)
 Usage
 bash
-
-复制
 
 ## Create a patch release (0.0.x)
 
