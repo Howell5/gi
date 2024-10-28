@@ -1,3 +1,4 @@
+// tsup.config.ts
 import { defineConfig } from 'tsup'
 
 export default defineConfig({
@@ -5,7 +6,10 @@ export default defineConfig({
   format: ['esm'],
   dts: true,
   clean: true,
-  minify: true,
+  minify: false,
   splitting: false,
   sourcemap: true,
+  target: 'esnext', // 关键配置
+  platform: 'node',
+  shims: true,
 })
