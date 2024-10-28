@@ -20,9 +20,9 @@ brew install glab
 ## Installation
 
 ```bash
-npm install -g gi-version-manager
+npm install -g @howell5/gi
 # or
-pnpm add -g gi-version-manager
+pnpm add -g @howell5/gi
 ```
 
 ## Prerequisites
