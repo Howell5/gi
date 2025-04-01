@@ -1,11 +1,30 @@
 import { exec } from 'node:child_process'
 import { promisify } from 'node:util'
+import * as readline from 'node:readline'
 
 const execAsync = promisify(exec)
 
 export type ReleaseType = 'major' | 'minor' | 'patch' | 'alpha' | 'beta'
 
 export class VersionManager {
+  private createReadlineInterface() {
+    return readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    })
+  }
+
+  private async askQuestion(
+    rl: readline.Interface,
+    question: string
+  ): Promise<string> {
+    return new Promise((resolve) => {
+      rl.question(question, (answer) => {
+        resolve(answer)
+      })
+    })
+  }
+
   async incrementVersion(type: ReleaseType): Promise<string> {
     try {
       await execAsync('which glab')
@@ -20,6 +39,46 @@ export class VersionManager {
     )
 
     const currentTag = stdout.trim()
+
+    // 处理没有标签的情况
+    if (!currentTag) {
+      const rl = this.createReadlineInterface()
+
+      try {
+        const createNew = await this.askQuestion(
+          rl,
+          'No valid version tag found. Do you want to create a new one? (y/n): '
+        )
+
+        if (
+          createNew.toLowerCase() !== 'y' &&
+          createNew.toLowerCase() !== 'yes'
+        ) {
+          rl.close()
+          throw new Error('操作已取消')
+        }
+
+        const initialVersion = await this.askQuestion(
+          rl,
+          'Input the initial version (e.g. v1.0.0): '
+        )
+
+        rl.close()
+
+        // 验证用户输入的版本格式
+        const versionRegex = /^v\d+\.\d+\.\d+$/
+        if (!versionRegex.test(initialVersion)) {
+          throw new Error('无效的版本格式。请使用格式 vX.Y.Z')
+        }
+
+        await execAsync(`glab release create ${initialVersion}`)
+        return initialVersion
+      } catch (error) {
+        rl.close()
+        throw error
+      }
+    }
+
     const match = currentTag.match(
       /v(\d+)\.(\d+)\.(\d+)(?:-([a-zA-Z]+)\.(\d+))?/
     )
